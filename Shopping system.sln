@@ -1,31 +1,907 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.8.34330.188
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shopping system", "Shopping system\Shopping system.vcxproj", "{9032DA42-FC44-48D7-9694-D84146A6C338}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9032DA42-FC44-48D7-9694-D84146A6C338}.Debug|x64.ActiveCfg = Debug|x64
-		{9032DA42-FC44-48D7-9694-D84146A6C338}.Debug|x64.Build.0 = Debug|x64
-		{9032DA42-FC44-48D7-9694-D84146A6C338}.Debug|x86.ActiveCfg = Debug|Win32
-		{9032DA42-FC44-48D7-9694-D84146A6C338}.Debug|x86.Build.0 = Debug|Win32
-		{9032DA42-FC44-48D7-9694-D84146A6C338}.Release|x64.ActiveCfg = Release|x64
-		{9032DA42-FC44-48D7-9694-D84146A6C338}.Release|x64.Build.0 = Release|x64
-		{9032DA42-FC44-48D7-9694-D84146A6C338}.Release|x86.ActiveCfg = Release|Win32
-		{9032DA42-FC44-48D7-9694-D84146A6C338}.Release|x86.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5FF6C793-C322-42A9-A072-A620FBD7BC5F}
-	EndGlobalSection
-EndGlobal
+#include<iostream>
+#include <windows.h>
+#include<vector>
+#include <iomanip>
+using namespace std;
+vector<string> products;
+vector<int>prices;
+vector<float>quantities;
+//a function which takes the product name and the price as an input and ask the user to enter the quantity 
+void addProduct(string product, int price) {
+    float quantity;
+    cout << "\n\nEnter Quantity: ";
+    cin >> quantity;
+    products.push_back(product);
+    prices.push_back(price);
+    quantities.push_back(quantity);
+}
+void setColor(int color) {// Function to set background color
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+// Function to reset text and background colors to default
+void resetColor() {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
+}
+//a function which has passing values of  the price and the quantity 
+void wantToBuy(string quantity, int price) {
+    char choice;
+    cout << "\nPress Y to buy product: ";
+    cin >> choice;
+    if (choice == 'y' || choice == 'Y') {
+
+        addProduct(quantity, price);//a function that is declared above 
+    }
+}
+
+
+//this function is the grocery section that have the items and the prices stored in it 
+void Food() {
+  
+    int choice;
+
+    cout << "               \n\n\n\n ";
+    setColor(FOREGROUND_GREEN | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    cout << setw(30) << setfill(' ') << "  " << " * *Welcome to Food section" << endl;
+    resetColor();
+    cout << "\n";
+    do {
+        cout << "Enter the following numbers to buy things you want:" << endl;
+        cout << setw(30) << setfill(' ') << "  " << "1. Fruits" << endl << setw(30) << setfill(' ') << "  " << "2. Vegetables." << endl << setw(30) << setfill(' ') << "  " << "3. Packed Items" << endl;
+
+
+        cout << "Enter the following numbers to buy things you want:";
+
+        cin >> choice;
+    } while (choice > 3);
+
+    resetColor();
+    switch (choice)
+    {
+        int Vegetables, Fruits, apple, Mango, Orange, Packed_items, Milk, Bread, Pulses, Tea;
+
+    case 1:
+    {
+
+        do {
+            cout << setw(30) << setfill(' ') << " \n\n\n\nWe have 3 type of fruits :" << endl;
+            cout << setw(30) << setfill(' ') << "1.Apple" << endl << setw(30) << setfill(' ') << "2.Mango" << endl << setw(30) << setfill(' ') << "3.Oranges " << endl;
+            cout << setw(30) << setfill(' ') << "What do you want to purchase:";
+            cin >> Fruits;
+        } while (Fruits > 3);
+
+        if (Fruits == 1) {
+            do {
+                cout << "\n\n\n\nWe have two type of Apples:\n1. Red \n2. Semi-Red" << endl;
+                cout << "\nWhat type of apple do you want purchase:";
+                cin >> apple;
+            } while (apple > 2);
+            if (apple == 1) {
+                cout << "\n\nThese are Imported Apples:\n\n\n  ***(Price)****\n   Rs.160/kg\n\n" << endl;
+
+                wantToBuy("Red Apple", 160);               //ask from user to buy or not             if yes call addProduct(productName,price);
+
+            }
+            else if (apple == 2) {
+
+                cout << "\n\nThese are Pakistani Apples:\n\n\n  ***(Price)****\n     Rs.140/kg\n\n  " << endl;
+
+                wantToBuy("Semi-Red", 140);      //ask from user to buy or not             if yes call addProduct(productName,price);
+
+            }
+        }
+
+        else if (Fruits == 2) {
+            do {
+                cout << "\n\n\n\nWe have 3 types of Mangoes:" << endl << "1. Chaunsa" << endl << "2. Sindhri" << endl << "3.Langra" << endl;
+                cout << "What type of Mango do you want to purchase:";
+                cin >> Mango;
+            } while (Mango > 3);
+            if (Mango == 1) {
+                cout << "***(Price)****\n    Rs.200/kg\n\n " << endl;
+
+                wantToBuy("Chaunsa", 200);              //ask from user to buy or not if yes call addProduct(productName,price);
+            }
+
+            else  if (Mango == 2) {
+
+                cout << "***(Price)****\n   Rs.170/kg\n\n     " << endl;
+                wantToBuy("Sindhri", 170);              //ask from user to buy or not if yes call addProduct(productName,price);
+
+            }
+            else if (Mango == 3) {
+
+                cout << "***(Price)****\n      Rs.150/kg\n\n " << endl;
+                wantToBuy("Langraa", 150);              //ask from user to buy or not if yes call addProduct(productName,price);
+
+            }
+        }
+        else if (Fruits == 3) {
+            do {
+                cout << "\n\n\n\nWe have 3 types of Oranges:\n1. Kinnoo\n2.Malta\n3. Fruiters" << endl;
+                cout << "What type of Orange do you want to purchase  =";
+                cin >> Orange;
+            } while (Orange > 3);
+            if (Orange == 1) {
+                cout << "\n\nKinno:\n\n\    ***(Price)****\n    Rs.150/dosen\n\n " << endl;
+                wantToBuy("Kinnoo", 150);                //ask from user to buy or not  if yes call addProduct(productName,price);
+            }
+            else   if (Orange == 2) {
+
+                cout << "\n\nMalta:\n\n\n      ***(Price)****\n    Rs.120/dosen\n\n  " << endl;
+
+                resetColor();  wantToBuy("Malta", 120);              //ask from user to buy or no  if yes call addProduct(productName,price);
+            }
+            else   if (Orange == 3) {//these if are for the model choosing
+
+                cout << "\n\nFruiters\n\n\n   ***(Price)****\n     Rs.80/dosen\n\n    " << endl;
+                wantToBuy("Fruiters", 80);               //ask from user to buy or not  if yes call addProduct(productName,price);
+            }
+        }
+        break; }
+
+    case 2: {
+
+        do {
+            cout << " \n\n\n\n";
+            cout << setw(30) << setfill(' ') << "We have these vegetables:" << endl << "1. Tomato" << endl << "2.Onions" << endl << "3.Potatoes " << endl << "4.Garlic" << endl
+                << "5.Chillies" << endl << "6.LadyFinger" << endl << "7.Cabbage" << endl << "8.Spinach" << endl;
+
+            cout << setw(30) << setfill(' ') << "choose from the above mentioned  =";
+            cin >> Vegetables;
+        } while (Vegetables > 4);
+        resetColor();
+        if (Vegetables == 1) {
+
+            cout << "Tomatoes are Rs.40/kg" << endl;
+            wantToBuy("Tomatoes", 40);           //ask from user to buy or not   if yes call addProduct(productName,price);
+        }
+        else if (Vegetables == 2) {
+
+            cout << "Onions are Rs.30/kg" << endl;
+            wantToBuy("Onions", 30);           //ask from user to buy or not   if yes call addProduct(productName,price);
+        }
+
+        else  if (Vegetables == 3) {
+            cout << "Potatoes are Rs.60/kg" << endl;
+            wantToBuy("Potatoes", 60);            //ask from user to buy or not if yes call addProduct(productName,price);
+        }
+        else if (Vegetables == 4) {
+            cout << "Garlic is Rs.460/kg" << endl;
+            wantToBuy("Garlic", 460);           //ask from user to buy or not    if yes call addProduct(productName,price);
+        }
+        else  if (Vegetables == 5) {
+            cout << "Chillies are Rs.20/kg" << endl;
+            wantToBuy("Chillies ", 20);            //ask from user to buy or not   if yes call addProduct(productName,price);
+        }
+        else   if (Vegetables == 6) {
+
+            cout << "LadyFingers are Rs.40/kg" << endl;
+            wantToBuy("LadyFingers", 40);            //ask from user to buy or not    if yes call addProduct(productName,price);
+        }
+        else  if (Vegetables == 7) {
+            cout << "Cabbage is Rs.60/kg" << endl;
+            wantToBuy("Cabbage", 60);           //ask from user to buy or not    if yes call addProduct(productName,price);
+        }
+        else    if (Vegetables == 8) {
+            cout << "Spinach is Rs.50/kg" << endl;
+            wantToBuy("Spinach", 50);           //ask from user to buy or not   if yes call addProduct(productName,price);
+        }
+        break;
+    }
+
+    case 3: {
+        do {
+            cout << " \n\n\n\n";
+            cout << setw(30) << setfill(' ') << "We have these type of Packed grocery items:" << endl << "1. Milk" << endl << "2.Bread" << endl << "3.Pulses" << endl << "";
+            cout << "choose from the above mentioned  =";
+            cin >> Packed_items;
+        } while (Packed_items > 3);
+
+        if (Packed_items == 1) {
+            do {
+                cout << setw(30) << setfill(' ') << "\n\n\n\nWe have 3 types of Milk:" << endl << "1. Nestle" << endl << "2. Olper" << endl << "3. Nurpur " << endl;
+                cout << "\nWhat type of Milk do you want:";
+                cin >> Milk;
+            } while (Milk > 3);
+
+            if (Milk == 1) {
+                cout << "\n\nNestle:\n\n\n   ***(Price)****\n  Rs.235/l\n\n " << endl;
+                wantToBuy("Nestle", 235);              //ask from user to buy or not   if yes call addProduct(productName,price);
+            }
+
+            else if (Milk == 2) {
+                cout << "\n\nOlper:\n\n\n    ***(Price)****\n Rs.220/l\n\n " << endl;
+                wantToBuy("Olper", 220);               //ask from user to buy or not   if yes call addProduct(productName,price);
+            }
+
+            else if (Milk == 3) {
+                setColor(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+                cout << "\n\nNurpur:\n\n\n   ***(Price)****\n   Rs.200/l\n\n     " << endl;
+                wantToBuy("Nurpur", 200);               //ask from user to buy or not      if yes call addProduct(productName,price);
+            }
+        }
+
+
+        else if (Packed_items == 2) {//THIS IF IS FOR the brand choosing         
+            do {
+                cout << setw(30) << setfill(' ') << "\n\n\n\nWe have 3 types of Breads:" << endl << "1. White Bread" << endl << "3. Shawarma Bread" << endl;
+                cout << setw(30) << setfill(' ') << "What type of bread you want to buy..... ";
+                cin >> Bread;
+            } while (Bread > 3);
+            if (Bread == 1) {
+                cout << "\n\n White Bread:\n\n\n   ***(Price)****\n  Rs.170\n\n   " << endl;
+                wantToBuy("White Bread", 170);               //ask from user to buy or not  if yes call addProduct(productName,price);
+            }
+            else if (Bread == 2) {
+                cout << "\n\n Bran Bread:\n\n\n     ***(Price)****\n Rs.200\n\n  " << endl;
+                wantToBuy(" Bran Bread", 200);               //ask from user to buy or not   if yes call addProduct(productName,price);
+            }
+            else if (Bread == 3) {
+                cout << "\n\n Shawarma Bread:\n\n\n ***(Price)****\nRs.100\n\n   " << endl;
+                wantToBuy("Shawarma Bread", 100);               //ask from user to buy or not               //if yes call addProduct(productName,price);
+            }
+        }
+        else if (Packed_items == 3) {//THIS IF IS FOR the brand choosing     
+            do {
+                cout << setw(30) << setfill(' ') << "\n\n\n\nWe have many types of Pulses:" << endl << "1. Daal Maash" << endl << "2. Daal Chana" << endl << "3. Daal Moong" << endl << "4. Daal Masoor" << endl << "5. Lobia" << endl << "6. White chana" << endl << "7. Black Chana" << endl << "8. Red Lobia" << endl;
+                cout << setw(30) << setfill(' ') << "choose the model and enter the number =";
+                cin >> Pulses;
+            } while (Pulses > 8);
+
+            if (Pulses == 1) {
+
+                cout << "\n\nDaal Maash\n\n\  ***(Price)****\n      Rs.520/kg  \n ";
+                wantToBuy("Daal Maash", 520);                //ask from user to buy or not     if yes call addProduct(productName,price);
+            }
+
+            else if (Pulses == 2) {
+                cout << "\n\nDaal Chana:\n\n\  ***(Price)****\n      Rs.400/kg\n\n    " << endl;
+                resetColor();
+                wantToBuy("Daal Chana", 400);              //ask from user to buy or not   if yes call addProduct(productName,price);
+            }
+            else   if (Pulses == 3) {
+                cout << "\n\nDaal Moong:\n\n\  ***(Price)****\n      Rs.300/kg\n\n    " << endl;
+
+                wantToBuy("Daal Moong", 300);              //ask from user to buy or not    if yes call addProduct(productName,price);
+            }
+            else    if (Pulses == 4) {
+                cout << "\n\nDaal Masoor:\n\n\  ***(Price)****\n      Rs.220/kg\n\n    " << endl;
+                wantToBuy("Daal Masoor", 220);                //ask from user to buy or not    if yes call addProduct(productName,price);
+            }
+            else    if (Pulses == 5) {
+                cout << "\n\nLobia:\n\n\  ***(Price)****\n      Rs.270/kg\n\n    " << endl;
+                wantToBuy("Lobia", 270);               //ask from user to buy or not      if yes call addProduct(productName,price);
+            }
+            else    if (Pulses == 6) {
+                cout << "\n\nWhita Chana:\n\n\  ***(Price)****\n      Rs.230/kg\n\n    " << endl;
+                wantToBuy("Whita Chana", 230);               //ask from user to buy or not    if yes call addProduct(productName,price);  ";
+            }
+            else     if (Pulses == 7) {
+                cout << "\n\nBlack Chana:\n\n\  ***(Price)****\n      Rs.220/kg\n\n    " << endl;
+                wantToBuy("Black Chana", 220);               //ask from user to buy or not if yes call addProduct(productName,price);
+            }
+            else     if (Pulses == 8) {
+
+                cout << "\n\nRed Lobia:\n\n\  ***(Price)****\n      Rs.420/kg\n\n    " << endl;
+                wantToBuy("Red Lobia", 420);              //ask from user to buy or not if yes call addProduct(productName,price);;
+            }
+        }
+
+        break; }
+    default: {
+        cout << "you have entered an invalid number "; break;
+    }
+
+
+    }
+}
+
+void electronics() {
+
+    int chice, a, aa, bb, bbb, c, cc, ccc, cccc, d, dd, ddd, dddd, e, ee, eeee;
+    setColor(FOREGROUND_GREEN | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    cout << "               \n\n\n\n                             **Welcome to Electronics section" << endl;
+    resetColor();
+    cout << "\n";
+    do {
+        cout << "Please chosse what you want to buy from our shopping system" << endl;
+        cout << "Enter the following numbers to buy things you want:" << endl;
+        cout << setw(30) << setfill(' ') << "  " << "1. Fridges " << endl << setw(30) << setfill(' ') << "  " << "2.Oven" << endl;
+        cout << setw(30) << setfill(' ') << "  " << "3.AC " << endl << setw(30) << setfill(' ') << "  " << "4.Washing machine" << endl;
+        cout << "Enter the following numbers to buy things you want:";
+        cin >> chice;
+    } while (chice > 3);
+    resetColor();
+
+    switch (chice) {
+    case 1:
+    {
+        do {
+            cout << " \n\n\n\n";
+            cout << "We have 3 brands for fridges:\n" << setw(30) << setfill(' ') << "1. Haier\n" << setw(30) << setfill(' ') << "2. Kenwood\n" << setw(30) << setfill(' ') << "3. Dawlence " << endl;
+            cout << "choose from the above mentioned  =";
+            cin >> a;
+        } while (a > 3);
+        if (a == 1) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nHaier has following models of fridges:" << endl << setw(30) << setfill(' ') << "1. Hrf 111 fridge" << endl << setw(30) << setfill(' ') << "2. Hrf222 fridge " << endl << setw(30) << setfill(' ') << "3. Hrf333 fridge" << endl;
+                cout << "\nchoose the models and enter the number:";
+                cin >> aa;
+            } while (aa > 3);
+            if (aa == 1) {//these if are for the model choosing
+                cout << "\n\nHrf111 fridge is our latest model:\n\n\n                        (Price)****\n                           55000\n\n         -----------------****Specifications----------------- \nFully Automatic\nCheap price\nSave electricity  " << endl;
+                wantToBuy("Hrf111 fridge", 55000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            } if (aa == 2) {//these if are for the model choosing
+                cout << "\n\nHrf222 fridge is our latest model:\n\n\n                        (Price)****\n                           65000\n\n         -----------------****Specifications----------------- \nTemprature sensor\nBest cooling system\nSave electricity  " << endl;
+                wantToBuy("Hrf222 fridge", 65000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }if (aa == 3) {//these if are for the model choosing
+                cout << "\n\nHrf333 fridge is our latest model:\n\n\n                        (Price)****\n                           75000\n\n         -----------------****Specifications----------------- \nLatest technology\nBest cooling system\nSave electricity  " << endl;
+                wantToBuy("Hrf333 f", 75000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+        }
+        else if (a == 2) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nKenwood has following models of fridge:" << endl << setw(30) << setfill(' ') << "1. Ken111 fridge" << endl << setw(30) << setfill(' ') << "2. Ken222 fridge" << endl << setw(30) << setfill(' ') << "3. Ken333 fridge" << endl;
+                cout << "choose the model and enter the number =";
+                cin >> bb;
+            } while (bb > 3);
+            if (bb == 1) {//these if are for the model choosing
+                cout << "\n\nKen111 fridge is our latest model:\n\n\n                        (Price)****\n                               55000\n\n         -----------------****Specifications----------------- \nTemprature sensor\nBest cooling system\nSave electricity  " << endl;
+                wantToBuy("Ken111 fridge", 55000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price
+            }
+            else if (bb == 2) {//these if are for the model choosing
+                cout << "\n\nKen222 fridge is our latest model:\n\n\n                        (Price)****\n                                65000\n\n         -----------------****Specifications----------------- \nFully Automatic\nCheap price\nSave electricity  " << endl;
+                wantToBuy("Ken222", 65000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+            else if (bb == 3) {//these if are for the model choosing
+                cout << "\n\nKen333 fridge is our latest model:\n\n\n                        (Price)****\n                                 75000\n\n         -----------------****Specifications---------------- \nLatest technology\nBest cooling system\nSave electricity  " << endl;
+                wantToBuy("Ken333 fridge", 75000);      //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+        }
+        else if (a == 3) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nDawlence  has following models of fridge:" << endl << setw(30) << setfill(' ') << "1. Dawlence2021 fridge" << endl << setw(30) << setfill(' ') << "2. Dawlence2022 fridge" << endl << setw(30) << setfill(' ') << "3. Dawlence2023 fridge" << endl;
+                cout << "choose the model and enter the number =";
+                cin >> bbb;
+            } while (bbb > 3);
+            if (bbb == 1) {//these if are for the model choosing
+                cout << "\n\nDawlence2021 fridge is our latest model:\n\n\                        (Price)****\n                              77000\n\n         -----------------****Specifications----------------- \nTemprature sensor\nBest cooling system\nSave electricity  " << endl;
+                wantToBuy("Dawlence2021", 77000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+            if (bbb == 2) {//these if are for the model choosing
+                cout << "\n\nDawlence2022 fridge is our latest model:\n\n\n                        (Price)****\n                              65000\n\n         -----------------****Specifications----------------- \nLatest technology\nCheap price\nSave electricity  " << endl;
+                wantToBuy("Dawlence2022", 65000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+            if (bbb == 3) {//these if are for the model choosing
+                cout << "\n\nDawlence2023 fridge is our latest model:\n\n\n                        (Price)****\n                             80000\n\n         -----------------****Specifications----------------- \nFully Automatic\nBest cooling system\nSave electricity  " << endl;
+                wantToBuy("Dawlence2023", 80000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+        }
+        break; }
+    case 2: {
+        do {
+            cout << " \n\n\n\n";
+            cout << "We have 3 brands of oven :" << endl << setw(30) << setfill(' ') << "1. Haier" << endl << setw(30) << setfill(' ') << setw(30) << setfill(' ') << "2. Kenwood" << endl << setw(30) << setfill(' ') << "3. Dawlence " << endl;
+            cout << "choose from the above mentioned  =";
+
+            cin >> c;
+        } while (c > 3);
+        if (c == 1) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nHaier has following models:" << endl << setw(30) << setfill(' ') << "1. Haier oven 1" << endl << setw(30) << setfill(' ') << "2.Haier oven 2" << endl << setw(30) << setfill(' ') << "3.Haier oven 3" << endl;
+                cout << "\nchoose the models and enter the number:";
+                cin >> cc;
+            } while (cc > 3);
+            if (cc == 1) {//these if are for the model choosing
+                cout << "\n\nHaier oven 1 is our latest model:\n\n\n                        (Price)****\n                           15000\n\n         -----------------****Specifications----------------- \nFully Automatic\nBakes perfectly\nSave electricity  " << endl;
+                wantToBuy("Haier oven 1", 15000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+            else if (cc == 2) {//these if are for the model choosing
+                cout << "\n\nHaier oven 2 is our latest model:\n\n\n                        (Price)****\n                           26000\n\n         -----------------****Specifications----------------- \nTemprature sensor\nBest baking  system\nSave electricity  " << endl;
+                wantToBuy("Haier oven 2", 26000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+            else if (cc == 3) {//these if are for the model choosing
+                cout << "\n\nHaier oven 3 is our latest model:\n\n\n                        (Price)****\n                           13000\n\n         -----------------****Specifications----------------- \nLatest technology\nBest pizza maker\nSave electricity  " << endl;
+                wantToBuy("Haier oven 3", 13000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+        }
+
+
+
+        else if (c == 2) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nKenwood has following models:\n" << setw(30) << setfill(' ') << "1. Kens oven 21" << endl << setw(30) << setfill(' ') << "2. Kens oven 22" << endl << setw(30) << setfill(' ') << "3. Kens oven 23" << endl;
+                cout << "choose the model and enter the number =";
+                cin >> ccc;
+            } while (ccc > 3);
+            if (ccc == 1) {//these if are for the model choosing
+                cout << "\n\nKens oven 21 is our latest model:\n\n\n                        (Price)****\n                               15000\n\n         -----------------****Specifications----------------- \nTemprature sensor\nBest heating system\nSave electricity  " << endl;
+                wantToBuy("Kens oven 21", 15000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            } if (ccc == 2) {//these if are for the model choosing
+                cout << "\n\nKens oven 22 is our latest model:\n\n\n                        (Price)****\n                                26000\n\n         -----------------****Specifications----------------- \nFully Automatic\nCheap price\nSave electricity  " << endl;
+                wantToBuy("Kens oven 22 ", 26000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            } if (ccc == 3) {//these if are for the model choosing
+                cout << "\n\nKens oven 23 is our latest model:\n\n\n                        (Price)****\n                                 17000\n\n         -----------------****Specifications---------------- \nLatest technology\nBest pizza maker\nSave electricity  " << endl;
+                wantToBuy("Kens oven 23", 17000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+        }
+        else if (c == 3) {//THIS IF IS FOR the brand choosing 
+            do {
+                setColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+                cout << "\n\n\n\nDawlence  has following models:" << endl << setw(30) << setfill(' ') << "1. Dawlence oven 21" << endl << setw(30) << setfill(' ') << "2. Dawlence oven 22" << endl << setw(30) << setfill(' ') << "3. Dawlence oven 23" << endl;
+                cout << "choose the model and enter the number =";
+                cin >> cccc;
+            } while (cccc > 3);
+            if (cccc == 1) {//these if are for the model choosing
+                cout << "\n\nDawlence oven 21 is our latest model:\n                     (Price)****\n                              11000\n\n         -----------------****Specifications----------------- \nTemprature sensor\nBest heating system\nSave electricity  " << endl;
+                wantToBuy("Dawlence oven 21", 11000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+
+            }
+            if (cccc == 2) {//these if are for the model choosing
+                cout << "\n\nDawlence oven 22 is our latest model:\n\n\n                        (Price)****\n                              19000\n\n         -----------------****Specifications----------------- \nLatest technology\nEasy to use\nSave electricity  " << endl;
+                wantToBuy("Dawlence oven 22", 19000);
+                //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+            if (cccc == 3) {//these if are for the model choosing
+                cout << "\n\nDawlence oven 23 is our latest model:\n\n\n                        (Price)****\n                             28000\n\n         -----------------****Specifications----------------- \nFully Automatic\nBest cake baker\nSave electricity  " << endl;
+                wantToBuy("Dawlence oven 23 ", 28000);              //ask from user to buy or not
+                //if yes call addProduct(productName,price);;
+            }
+        }
+        break;  }
+    case 3: {
+        do {
+            cout << " \n\n\n\n";
+            cout << "We have 3 brands :" << endl << setw(30) << setfill(' ') << "1. Haier" << endl << setw(30) << setfill(' ') << "2. Mitsubishi" << endl << setw(30) << setfill(' ') << "3. Dawlence " << endl;
+            cout << "choose from the above mentioned  =";
+            cin >> d;
+        } while (d > 3);
+        if (d == 1) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nHaier has following models:" << endl << setw(30) << setfill(' ') << "1. Haier AC 1" << endl << setw(30) << setfill(' ') << "2. Haier AC 2" << endl << setw(30) << setfill(' ') << "3. Haier AC 3" << endl;
+                cout << "\nchoose the models and enter the number:";
+                cin >> dd;
+            } while (dd > 3);
+            if (dd == 1) {//these if are for the model choosing
+                cout << "\n\nHaier AC 1 is our latest model:\n\n\n                        (Price)****\n                           115000\n\n         -----------------****Specifications----------------- \nFully Automatic\nBest cooling \nSave electricity  " << endl;
+                wantToBuy("Haier AC 1", 115000);              //ask from user to buy or not
+            }
+            else if (dd == 2) {//these if are for the model choosing
+                cout << "\n\nHaier AC 2 is our latest model:\n\n\n                        (Price)****\n                          126000\n\n         -----------------****Specifications----------------- \nTemprature sensor\nDc inverter\nSave electricity  " << endl; resetColor();
+                wantToBuy("Haier AC 2 ", 126000);              //ask from user to buy or not
+            }
+            else if (dd == 3) {//these if are for the model choosing
+                cout << "\n\nHaier AC 3 is our latest model:\n\n\n                        (Price)****\n                           113000\n\n         -----------------****Specifications----------------- \nLatest technology\nSolar inverter\nSave electricity  " << endl;
+                wantToBuy("Haier AC 3", 113000);              //ask from user to buy or not
+            }
+        }
+        else if (d == 2) {//THIS IF IS FOR the brand choosing
+            do {
+                cout << "\n\n\n\nMitsubishi has following models:" << endl << setw(30) << setfill(' ') << "1. Mits AC 21" << endl << setw(30) << setfill(' ') << "2. Mits AC 22" << endl << setw(30) << setfill(' ') << "3. Mits AC 23" << endl;
+                cout << "choose the model and enter the number =";
+                cin >> ddd;
+            } while (ddd > 3);
+            if (ddd == 1) {//these if are for the model choosing
+                cout << "\n\n Mits AC 21 is our latest model:\n\n\n                        (Price)****\n                               110000\n\n         -----------------****Specifications----------------- \nTemprature sensor\nBest cooling system\nSave electricity  " << endl;
+                wantToBuy(" Mits AC 21", 110000);              //ask from user to buy or not
+            }
+            else if (ddd == 2) {//these if are for the model choosing              
+                cout << "\n\n Mits AC 22 is our latest model:\n\n\n                        (Price)****\n                                220000\n\n         -----------------****Specifications----------------- \nFully Automatic\nDC inverter\nSave electricity  " << endl;
+                wantToBuy("Mits AC 22", 220000);              //ask from user to buy or not
+
+            }
+            else if (ddd == 3) {//these if are for the model choosing
+                cout << "\n\n Mits AC 23 is our latest model:\n\n\n                        (Price)****\n                                 97000\n\n         -----------------****Specifications---------------- \nLatest technology\nNo environmental pollution \nSave electricity  " << endl;
+                wantToBuy("Mits AC 23", 97000);              //ask from user to buy or not
+            }
+        }
+        else if (d == 3) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nDawlence  has following models:\n" << setw(30) << setfill(' ') << "1. Dawlence AC 21\n" << setw(30) << setfill(' ') << "2. Dawlence AC 22\n" << setw(30) << setfill(' ') << "3. Dawlence AC 23" << endl;
+                cout << "choose the model and enter the number =";
+                cin >> dddd;
+            } while (dddd > 3);
+            if (dddd == 1) {//these if are for the model choosing
+                cout << "\n\nDawlence AC 21 is our latest model:\n\n\                        (Price)****\n                              199000\n\n         -----------------****Specifications----------------- \nTemprature sensor\nBest cooling system\nSave electricity  " << endl;
+                wantToBuy("Dawlence AC 21", 199000);              //ask from user to buy or not
+            }
+            else if (dddd == 2) {//these if are for the model choosing
+                cout << "\n\nDawlence Ac 22 is our latest model:\n\n\n                        (Price)****\n                              159000\n\n         -----------------****Specifications----------------- \nLatest technology\nMoisten your breath \nSave electricity  " << endl;
+                wantToBuy("Dawlence Ac 22", 159000);              //ask from user to buy or not
+            }
+            else if (dddd == 3) {//these if are for the model choosing
+                cout << "\n\nDawlence AC 23 is our latest model:\n\n\n                        (Price)****\n                             128000\n\n         -----------------****Specifications----------------- \nFully Automatic\nDC inverter \nSave electricity  " << endl;
+                wantToBuy("Dawlence AC 23a", 128000);              //ask from user to buy or not
+            }
+        }
+        break;   }
+    case 4: {
+        do {
+            cout << " \n\n\n\n";
+            cout << "We have 2 brands of washing machine  :\n" << setw(30) << setfill(' ') << "1. Superasia washing machine\n" << setw(30) << setfill(' ') << "2. Pakasia washing machine" << endl;
+            cout << "Select from the above mentioned  =";
+            cin >> e;
+        } while (e > 2);
+        if (e == 1) {//THIS IF IS FOR the brand choosing
+            do {
+                cout << "\n\n\n\nsuperasia has following models of washing machine:\n1. superasia 20 washing machine\n2. superasia 23 washing machine" << endl;
+                cout << "\nchoose the model and enter the number:";
+                cin >> ee;
+            } while (ee > 2);
+            resetColor();
+            if (ee == 1) {//these if are for the model choosing
+                cout << "\n\superasia 20 washing machine is our latest model:\n\n\n                        (Price)****\n                           35000\n\n         -----------------****Specifications----------------- \nFully Automatic\nSave electricity  " << endl;
+                wantToBuy("superasia 20", 35000);              //ask from user to buy or not
+            }
+            else if (ee == 2) {//these if are for the model choosing
+                cout << "\n\nsuperasia 23 washing machine is our latest model:\n\n\n                        (Price)****\n                          46000\n\n         -----------------****Specifications----------------- \nDc inverter\nSave electricity  " << endl;
+                wantToBuy("superasia 23 ", 46000);              //ask from user to buy or not
+            }
+        }
+        else if (e == 2) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\Pakasia  has following models of  washing machine:\n1. Paka 8 washing machine\n2. Paka 9 washing machine" << endl;
+                cout << "choose the model and enter the number =";
+                cin >> eeee;
+            } while (eeee > 2);
+            if (eeee == 1) {//these if are for the model choosing 
+                cout << "\n\nPaka 8 washing machine is our latest model:\n\n\                        (Price)****\n                              99000\n\n         -----------------****Specifications----------------- \nEasy to use\nSave electricity  " << endl;
+                wantToBuy("Paka 8", 99000);              //ask from user to buy or not
+            }if (eeee == 2) {//these if are for the model choosing
+                cout << "\n\nPaka 9 washing machine is our latest model:\n\n\n                        (Price)****\n                              59000\n\n         -----------------****Specifications----------------- \nLatest technology\nSave electricity  " << endl;
+                wantToBuy("Paka 9", 59000);              //ask from user to buy or not
+            }
+        }
+        break; }
+    default: {
+        cout << "you have entered an invalid number "; break;
+    }
+    }
+
+}
+void clothes() {
+    int chice, a, aa, b, bb, bbb;
+    do {
+        cout << " \n\n\n\n ";
+        setColor(FOREGROUND_GREEN | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+        cout << setw(30) << setfill(' ') << "  " << " **Welcome to clothes section" << endl;
+        resetColor();
+        cout << "\n";
+        cout << "Please chosse what you want to buy from our shopping system" << endl;
+        cout << "Enter the following numbers to buy things you want:" << endl;
+        cout << setw(30) << setfill(' ') << "  " << "1. Mens " << endl << setw(30) << setfill(' ') << "  " << " 2. Women " << endl << setw(30) << setfill(' ') << "  " << "3. Children" << endl;
+        cout << "Enter the following numbers to buy things you want:";
+        cin >> chice;
+    } while (chice > 3);
+
+    resetColor();
+    switch (chice) {
+    case 1: {
+        do {
+            cout << " \n\n\n\n";
+            cout << "We have 3 options :" << endl << setw(30) << setfill(' ') << " 1. Shirts" << endl << setw(30) << setfill(' ') << "2.Pants" << endl << setw(30) << setfill(' ') << "3.Shalwar kameez " << endl;
+            cout << "choose from the above mentioned  =";
+            cin >> a;
+        } while (a > 3);
+        if (a == 1) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nShirt has following Types:" << endl << setw(30) << setfill(' ') << "1. polo shirt" << endl << setw(30) << setfill(' ') << "2. Denim shirt" << endl << setw(30) << setfill(' ') << "3. Dress shirt" << endl;
+                cout << "\nchoose the type and enter the number:";
+                cin >> aa;
+            } while (aa > 3);
+            if (aa == 1) {//these if are for the model choosing
+                cout << "\n\nHrf111 is our latest Article:\n\n\n                        (Price)****\n                           2999\n\n         -----------------****Specifications----------------- \nFully Twin Needle Stitching.\nCheap price\nBetter look  " << endl;
+                wantToBuy("Hrf111", 2999);              //ask from user to buy or not
+            }
+            else if (aa == 2) {//these if are for the model choosing
+                cout << "\n\nHrf222 is our latest Article:\n\n\n                        (Price)****\n                           3999\n\n         -----------------****Specifications----------------- \nFabric Weight GSM.\nBest Selling\n  " << endl;
+                wantToBuy("Hrf222 ", 3999);              //ask from user to buy or not
+            }
+            else if (aa == 3) {//these if are for the model choosing
+                cout << "\n\nHrf333 is our latest Article:\n\n\n                        (Price)****\n                           4999\n\n         -----------------****Specifications----------------- \nLatest Article\n Fine Design  " << endl;
+                wantToBuy("Hrf333", 4999);              //ask from user to buy or not
+            }
+        }
+        else if (a == 2) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nPants has following Types:" << endl << setw(30) << setfill(' ') << "1. Trousers" << endl << setw(30) << setfill(' ') << "2. Dress Pants" << endl << setw(30) << setfill(' ') << "3. Jeans" << endl;
+                cout << "choose the model and enter the number =";
+                cin >> bb;
+            } while (bb > 3);
+            if (bb == 1) {//these if are for the model choosing
+                cout << "\n\nTrousers :\n\n\n                        (Price)****\n                               999\n\n         -----------------****Specifications----------------- \n Fully Twin Needle Stitching.\nCheap price\nBetter look  " << endl;
+                wantToBuy("Trousers", 999);              //ask from user to buy or not
+            }
+            else if (bb == 2) {//these if are for the model choosing
+                cout << "\n\nDress Pant:\n\n\n                        (Price)****\n                                2999\n\n         -----------------****Specifications----------------- \n Fully Twin Needle Stitching.\nCheap price\nBetter look " << endl;
+                wantToBuy("Dress Pant", 2999);              //ask from user to buy or not
+            }
+            else if (bb == 3) {//these if are for the model choosing
+                cout << "\n\nJeans:\n\n\n                        (Price)****\n                                 2999\n\n         -----------------****Specifications---------------- \n Fully Twin Needle Stitching.\nCheap price\nBetter look" << endl;
+                wantToBuy("Jeans", 2999);              //ask from user to buy or not
+            }
+        }
+        else if (a == 3) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nShalwar Kameez:" << endl << setw(30) << setfill(' ') << "1.Small" << endl << setw(30) << setfill(' ') << "2. Medium" << endl << setw(30) << setfill(' ') << "3. Large" << endl;
+                cout << "choose the Size and enter the number =";
+                cin >> bbb;
+            } while (bbb > 3);
+            if (bbb == 1) {//these if are for the model choosing
+                cout << "\n\nSmall:\n\n\                        *(Price)****\n                              5999\n\n  " << endl;
+                wantToBuy("Small", 5999);              //ask from user to buy or not
+            }
+            else if (bbb == 2) {//these if are for the model choosing
+                cout << "\n\nMedium:\n\n\n                        *(Price)****\n                              6999\n\n     " << endl;
+                wantToBuy("Medium", 6999);              //ask from user to buy or not
+            }
+            else if (bbb == 3) {//these if are for the model choosing
+                cout << "\n\nLarge:\n\n\n                        *(Price)****\n                             7999\n\n        " << endl;
+                wantToBuy("Large", 7999);              //ask from user to buy or not
+            }
+        }break; }
+    case 2: {
+        do {
+            cout << " \n\n\n\n";
+            cout << "We have 3 options :" << endl << setw(30) << setfill(' ') << "1. Burqa" << endl << setw(30) << setfill(' ') << "2. Unstitched" << endl << setw(30) << setfill(' ') << "3. Shalwar kameez " << endl;
+            cout << "choose from the above mentioned  =";
+            cin >> a;
+        } while (a > 3);
+        if (a == 1) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nBurqa has following Types:" << endl << setw(30) << setfill(' ') << "1. White (S , M , L)" << endl << setw(30) << setfill(' ') << "2. Black (S,M,L)" << endl << setw(30) << setfill(' ') << "3. Brown(S,M,L)" << endl;
+                cout << "\nchoose the type and enter the number:";
+              
+                cin >> aa;
+            } while (aa > 3);
+            
+            if (aa == 1) {//these if are for the model choosing
+                cout << "\n\nWhite is our latest Article:\n\n\n                        (Price)****\n                           2999\n\n         -----------------****Specifications----------------- \nFully Twin Needle Stitching.\nCheap price\nBetter look  " << endl;
+                wantToBuy("White ", 2999);              //ask from user to buy or not
+            }
+            else if (aa == 2) {//these if are for the model choosing
+                cout << "\n\nBlack is our latest Article:\n\n\n                        (Price)****\n                           3999\n\n         -----------------****Specifications----------------- \nFabric Weight GSM.\nBest Selling\n  " << endl;
+                wantToBuy("Black", 3999);              //ask from user to buy or not
+            }
+
+            else if (aa == 3) {//these if are for the model choosing
+                cout << "\n\nBrown is our latest Article:\n\n\n                        (Price)****\n                           4999\n\n         -----------------****Specifications----------------- \nLatest Article\n Fine Design  " << endl;
+                wantToBuy("Brown", 4999);              //ask from user to buy or not
+            }
+        }
+        else if (a == 2) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nUnstitched has following Types:" << endl << setw(30) << setfill(' ') << "1. 1piece" << endl << setw(30) << setfill(' ') << "2. 2piece" << endl << setw(30) << setfill(' ') << "3. 3piece" << endl;
+                cout << "choose the model and enter the number =";
+                cin >> bb;
+            } while (bb > 3);
+            if (bb == 1) {//these if are for the model choosing
+                cout << "\n\n1 piece :\n\n\n                        (Price)****\n                               1999\n\n         -----------------****Specifications----------------- \n Fully Twin Needle Stitching.\nCheap price\nBetter look  " << endl;
+                wantToBuy("1 piece", 1999);              //ask from user to buy or not
+            }
+            else if (bb == 2) {//these if are for the model choosing
+                cout << "\n\n 2 piece:\n\n\n                        (Price)****\n                                2999\n\n         -----------------****Specifications----------------- \n Fully Twin Needle Stitching.\nCheap price\nBetter look " << endl;
+                wantToBuy("2 piece", 2999);              //ask from user to buy or not
+            }
+            else if (bb == 3) {//these if are for the model choosing
+                cout << "\n\n3 piece:\n\n\n                        (Price)****\n                                 3999\n\n         -----------------****Specifications---------------- \n Fully Twin Needle Stitching.\nCheap price\nBetter look" << endl;
+                wantToBuy("3 piece", 3999);              //ask from user to buy or not
+            }
+        }
+        else if (a == 3) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nShalwar Kameez:" << endl << setw(30) << setfill(' ') << "1.Small" << endl << setw(30) << setfill(' ') << "2. Medium" << endl << setw(30) << setfill(' ') << "3. Large" << endl;
+                cout << "choose the Size and enter the number =";
+                cin >> bbb;
+            } while (bbb > 3);
+            if (bbb == 1) {//these if are for the model choosing
+                setColor(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+                cout << "\n\nSmall:\n\n\                        *(Price)****\n                              5999\n\n  " << endl;
+                wantToBuy("Small", 5999);              //ask from user to buy or not
+            }
+            else if (bbb == 2) {//these if are for the model choosing
+                cout << "\n\nMedium:\n\n\n                        *(Price)****\n                              6999\n\n     " << endl;
+                wantToBuy("Medium", 6999);              //ask from user to buy or not
+            }
+            else if (bbb == 3) {//these if are for the model choosing
+                cout << "\n\nLarge:\n\n\n                        *(Price)****\n                             7999\n\n        " << endl;
+                wantToBuy("Large", 7999);              //ask from user to buy or not
+            }
+        }
+        break;
+    }
+    case 3: {
+        do {
+            cout << " \n\n\n\n";
+            cout << "We have 2 options :" << endl << setw(30) << setfill(' ') << "1.Rampers " << endl << setw(30) << setfill(' ') << "2. Sleepers " << endl;
+            cout << "choose from the above mentioned  =";
+            cin >> a;
+        } while (a > 2);
+        resetColor();
+        if (a == 1) {//THIS IF IS FOR the brand choosing 
+            do {
+                cout << "\n\n\n\nRampers has following Types:" << endl << setw(30) << setfill(' ') << "1. 0-12 months old" << endl << setw(30) << setfill(' ') << "2. 1-2 years old" << endl << setw(30) << setfill(' ') << "3. 3-4 year old" << endl;
+                int aa;
+                cout << "\nchoose the type and enter the number:";
+                cin >> aa;
+            } while (aa > 3);
+            if (aa == 1) {//these if are for the model choosing
+                cout << "\n\n0-12 month old:\n\n\n                        (Price)****\n                           999\n\n         -----------------****Specifications----------------- \nFully Twin Needle Stitching.\nCheap price\nBetter look  " << endl;
+                wantToBuy("0-12 month ol", 999);              //ask from user to buy or not
+            }
+            else if (aa == 2) {//these if are for the model choosing
+                cout << "\n\n1-2 year:\n\n\n                        (Price)****\n                           1999\n\n         -----------------****Specifications----------------- \nFabric Weight GSM.\nBest Selling\n  " << endl;
+                wantToBuy("1-2 year", 1999);              //ask from user to buy or not
+            }
+            else if (aa == 3) {//these if are for the model choosing
+                cout << "\n\n2-3 year old:\n\n\n                        (Price)****\n                           4999\n\n         -----------------****Specifications----------------- \nLatest Article\n Fine Design  " << endl;
+                wantToBuy("2-3 year old", 4999);              //ask from user to buy or not
+            }
+        }
+
+
+
+        else if (a == 2) {//THIS IF IS FOR the brand choosing
+            do {
+                cout << "\n\n\n\nSleepers has following Types:" << endl << setw(30) << setfill(' ') << "1. 0-12 months old" << endl << setw(30) << setfill(' ') << "2. 1-2 years old" << endl << setw(30) << setfill(' ') << "3. 3-4 year old" << endl;
+                cout << "choose the model and enter the number =";
+                cin >> bb;
+            } while (bb > 3);
+            if (bb == 1) {//these if are for the model choosing
+                cout << "\n\n0-12 months old :\n\n\n                        (Price)****\n                               999\n\n         -----------------****Specifications----------------- \n Fully Twin Needle Stitching.\nCheap price\nBetter look  " << endl;
+                wantToBuy("0-12 months old", 999);              //ask from user to buy or not
+            }
+            else if (bb == 2) {//these if are for the model choosing
+                cout << "\n\n1-2 years old:\n\n\n                        (Price)****\n                                2999\n\n         -----------------****Specifications----------------- \n Fully Twin Needle Stitching.\nCheap price\nBetter look " << endl;
+                wantToBuy("1-2 years old", 2999);              //ask from user to buy or not
+            }
+            else if (bb == 3) {//these if are for the model choosing
+                cout << "\n\n3-4 year old:\n\n\n                        (Price)****\n                                 2999\n\n         -----------------****Specifications---------------- \n Fully Twin Needle Stitching.\nCheap price\nBetter look" << endl;
+                wantToBuy("3-4 year old", 2999);              //ask from user to buy or not
+            }
+        }
+
+        break;
+    }
+    default: {
+        cout << "you have entered an invalid number "; break;
+    }
+    }
+
+
+
+}
+void payment(int num, int totalPrice) {
+    string name;
+    int acc[11]; // Increase the size to accommodate null-terminator
+
+    if (num == 1) {
+        cout << endl << endl << setw(30) << setfill(' ') << "  " << " ***!  Your Total  BIll is  " << totalPrice + 120;
+    }
+    else {
+
+        cout << "Enter your name: ";
+        cin >> name;
+        bool flag = false;
+
+
+        cout << "Enter your account number (11 digits): " << endl;
+
+        for (int i = 0; i <= 10; i++) {
+            cout << "Digit Number " << i + 1 << " ";
+            cin >> acc[i];
+            if (acc[i] >= 0 && acc[i] <= 9) {
+                continue;
+            }
+            else {
+                flag = true;
+                break;
+            }
+        }
+
+
+
+
+        if (flag) {
+            cout << endl << "Invalid account number . " << endl;
+        }
+        else {
+            cout << endl << endl << setw(30) << setfill(' ') << "  " << " *** " << name << " Total  BIll is  " << totalPrice;
+        }
+    }
+}
+
+void display() {
+    int totalPrice = 0, num;
+    cout << "Products\tPrice\tQty\tTotalPrice" << endl;
+    for (int i = 0; i < products.size(); i++) {
+        cout << products[i] << "\t" << prices[i] << "\t" << quantities[i] << "\t" << prices[i] * quantities[i] << endl;
+        totalPrice = totalPrice + prices[i] * quantities[i];
+    }
+    cout << "\n\nTotal Amount: " << totalPrice;
+    if (totalPrice == 0) {
+        setColor(FOREGROUND_GREEN | FOREGROUND_GREEN | FOREGROUND_INTENSITY); cout << "\n\n\n\n            ------------Thanks for visiting our online shopping store------------            \n";
+        resetColor();
+        exit(0);
+    }
+    else {
+        do {
+            cout << endl << endl << "********* How do you like to pay " << endl;
+            cout << setw(30) << setfill(' ') << "  " << "1.cash on delivery (delivery charges 120)" << endl;
+            cout << setw(30) << setfill(' ') << "  " << "2.Online Transaction (no charges) ";
+            cin >> num;
+        } while (num > 2);
+        payment(num, totalPrice);
+    }
+}
+
+int main() {
+    int billAmount = 0;
+    int choice; system("cls");
+
+    char z;
+    do {
+        setColor(FOREGROUND_GREEN | FOREGROUND_GREEN | FOREGROUND_INTENSITY); cout << setw(30) << setfill(' ') << "  " << " --------------***( Cheema Mart )***------------" << endl << endl;
+        resetColor();
+        cout << "\n\nChoose your desired option from below" << endl << endl << setw(30) << setfill(' ') << "  " << "1. Electronics" << endl << setw(30) << setfill(' ') << "  " << "2. Food items (Fruits and vegetables)" << endl << setw(30) << setfill(' ') << "  " << "3. Clothes" << endl;
+        cout << "enter your product number   = ";
+        cin >> choice;
+        switch (choice) {
+        case 1: {
+            electronics();
+            break; }
+
+        case 2: {
+
+            Food();
+            break; }
+        case 3: {
+            clothes();
+            break; }
+        default: {
+            cout << "you have entered an invalid number "; break;
+        }
+        } setColor(FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_INTENSITY);
+        cout << "\n\nENTER   (Y   or    y) if you want to buy something else from our online store    ="; cin >> z;
+        resetColor();
+
+    } while (z == 'y' || z == 'Y');
+    setColor(FOREGROUND_RED | FOREGROUND_RED | FOREGROUND_INTENSITY);
+    cout << "\n\n\nBill is here:\n";
+    display();  resetColor();
+    setColor(FOREGROUND_GREEN | FOREGROUND_GREEN | FOREGROUND_INTENSITY); cout << "\n\n\n\n            ------------Thanks for visiting our online shopping store------------            \n";
+    resetColor();
+    return 0;
+}
